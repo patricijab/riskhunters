@@ -55,7 +55,7 @@ def filterThreats(threats):
 
 def index(request):
     # RED PANDA EXAMPLE
-    taxonid = "714"
+    taxonid = "714"#"68427761"
     species_name = "ailurus%20fulgens"
     name = getName(taxonid)
     status = switch(getStatus(taxonid))
@@ -72,8 +72,9 @@ def index(request):
 
     countries = getCountries(taxonid)
 
-    return render(request, 'webapp/index.html', {'range': range(4),
+    return render(request, 'webapp/index2.html', {'range': range(4),
                                                  'name': name,
                                                  'status': status,
                                                  'habitats': habitats,
-                                                 'threats': threats})
+                                                 'threats': threats,
+                                                 'taxonid': taxonid})
