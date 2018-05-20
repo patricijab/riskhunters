@@ -4,8 +4,12 @@ body {
 
 }
 
-.container {
+h4 {
+    margin-top: 30px !important;
+}
 
+.navbar-brand {
+    color: white;
 }
 
 .name {
@@ -19,6 +23,7 @@ body {
 
 .navbar {
     background-color: #336600;
+    height: 60px;
 }
 
 .current-status-label {
@@ -42,6 +47,10 @@ body {
 
 .red-panda-icon-history {
     width: 60px;
+}
+
+.slider {
+    width: 320px !important;
 }
 
 .red-panda {

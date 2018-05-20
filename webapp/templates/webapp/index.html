@@ -13,13 +13,12 @@
 <nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="">Risk Hunters</a>
+      <a class="navbar-brand" href=""><i class="fa fa-paw" style="font-size:24px; padding-right: 10px;"></i>Risk Hunters</a>
     </div>
     <form class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search species">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
       </form>
   </div>
 </nav>
@@ -35,7 +34,7 @@
         <div class="col-lg-6">
             <div class="panel panel-success">
 
-                <h1 class="name">{{name}} <span class="latin-name">{{latin_name}}</span></h1>
+                <h1 class="name">{{name}} <span class="latin-name">({{latin_name}})</span></h1>
 
                 <h4><i class="fa fa-info-circle status-icon" style="font-size:24px;"></i>Status:</h4><span class="current-status">{{ status }}</span>
 
@@ -59,7 +58,12 @@
                 <h4><i class="fa fa-history status-icon" style="font-size:24px;"></i>History:</h4>
 
                 <p>Year: <span id="demo"></span></p>
-                <p>Status: <span id="status">{{ status }}</span></p>
+
+                <div class="slidecontainer">
+                  <input type="range" min="{{ minimalYear }}" max="2018" value="2018" class="slider" id="myRange">
+                </div>
+
+                <p style="padding-top: 10px;">Status: <span id="status">{{ status }}</span></p>
 
                 {% load static %}
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon-history"/>
@@ -68,10 +72,15 @@
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon-history"/>
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon-history"/>
 
+                <h4><i class="fa fa-bolt status-icon" style="font-size:24px;"></i>Threats:</h4>
 
-                <div class="slidecontainer">
-                  <input type="range" min="{{ minimalYear }}" max="2018" value="2018" class="slider" id="myRange">
-                </div>
+                <ul>
+                    {% load static %}
+                    {% for t in threats %}
+                    <li>{{t}}</li>
+                    {% endfor %}
+                </ul>
+
 
             </div>
         </div>
@@ -80,18 +89,9 @@
 
     <div class="row">
 
-        <h4><i class="fa fa-bolt status-icon" style="font-size:24px;"></i>Threats:</h4>
+
 
     </div>
-
-
-<p>Threats:</p>
-<ul>
-    {% load static %}
-    {% for t in threats %}
-    <li>{{t}}</li>
-    {% endfor %}
-</ul>
 
 </div>
 
