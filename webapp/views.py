@@ -105,7 +105,7 @@ def filterHistory(history):
 
 def index(request):
     # RED PANDA EXAMPLE
-    taxonid = "714"
+    taxonid = "714" #"68427761"
     species_name = "Ailurus Fulgens"
     name = getName(taxonid)
     status = switch(getStatus(taxonid))
@@ -131,7 +131,8 @@ def index(request):
                                                  'threats': threats,
                                                  'history': history,
                                                  'statuses': json.dumps(statuses),
-                                                 'minimalYear': minimalYear})
+                                                 'minimalYear': minimalYear,
+                                                 'taxonid': taxonid})
 
 def indexBeforeIndex(request):
     species_json = getAllSpecies();
