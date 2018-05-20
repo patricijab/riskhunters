@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+	<title>Fake News Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style_custom.css"</link>
+	<script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="bootstrap.min.js" type="text/javascript"></script>
+	
+	 <style>
+		.mapClass {
+			height: 50%;
+			width: 50%;
+		}
+	 </style>
+</head>
+<body>
+
+	<!-- side menu -->
+	<div id="mySidenav" class="sidenav">
+		<a href="#result">Article analysis result</a>
+		<a href="#about">About the project</a>
+		<a href="#criteria">Criteria</a>
+		<a href="#apis">APIs used</a>
+		<a href="#team">The team</a>
+	</div>
+		
+   	<div id="main" class="container">
+   		<div class="header clearfix">
+   			<div style="display: inline-block; max-width: 300px;">
+   				<img src="copat.png" alt="logo" width="100px;" height="100px;" />
+   			</div>
+   			<div class="float right" style="display: inline-block;">
+   				<h3 class="text-muted" style="font:Helvetica;">FAKE NEWS EXPLAINED</h3>
+   			</div>
+   		<hr>
+
+   		<div class="jumbotron">
+   			<h3 class="display-3" style="font-weight:bold; font-size:44;">CHROME EXTENSION "FAKE NEWS"</h3>
+   			<p class="lead" style="font-size:36;">Against trolling, falsifying and deceiving news</p>
+			<select>
+			  <option id="" value="volvo">Red panda</option>
+			  <option id="" value="saab">Red fox</option>
+			  <option id="" value="opel">Red chicken</option>
+			  <option id="" value="audi">Black hole</option>
+			</select>
+   		</div>
+
+   		<div class="row marketing">
+
+			<div style="padding-top: 5%;">
+   				<h4 id="result" style="font-weight:bold; font-size:28px">Red panda</h4>
+				<img src="red_panda.jpg" alt="Panda" style="width: 150px; height: 150px; margin-bottom: 0.5em;">
+				<p  style="font-size:16px">
+				To see why we rated the article #placeholderForArticleTitle with score #placeholderForScore, follow <a href="#placeholderForRedireciton">this link</a>.
+				</p>
+			</div>
+		
+			<div style="padding-top: 5%;">
+   				<h4 id="about" style="font-weight:bold; font-size:28px">Where do we find #placeholderForAnimal?</h4>
+   				<p  style="font-size:16px">
+				We hate people selling us lies, so we decided to call them out on their bullshit. 
+				With our extension, anyone can find out what news are worthy of their time and who is only "clickbaiting" them. 
+				Let's put an end to media exaggeration, sensational headlines and overall low quality of the content just 
+				by clicking a button.
+				</p>
+				<div id="map" class="mapClass" style="width:400px;height:400px">My map will go here</div>
+   			</div>
+		
+			<div style="padding-top: 5%;">
+   				<h4 id="about" style="font-weight:bold; font-size:28px">Historical assesment</h4>
+   				<p  style="font-size:16px">
+				Tuki bo pregled gibanja števila živali?
+				</p>
+   			</div>
+		
+			<div style="padding-top: 5%;">
+   				<h4 id="criteria" style="font-weight:bold; font-size:28px">Regions of occurence</h4>
+   				<p>
+   				<ul>
+   					<li style="font-size:16px">title bias 5%</li>
+   					<li style="font-size:16px">content bias 60%</li>
+   					<li style="font-size:16px">domain bias 15%</li>
+   					<li style="font-size:16px">image scam 20%</li>
+   					<li style="font-size:16px">user reporting: for every user flagging the article as fake news, we take away 0.1% of its “trustworthiness” up to max 40% (at least 400 users) </li>
+				</ul>
+				</p>
+				<div id="map2" style="width:400px;height:400px">My map will go here</div>
+   			</div>
+			
+			<div style="padding-top: 5%;">
+   				<h4 id="apis" style="font-weight:bold; font-size:28px">Threats</h4>
+   				<p style="font-size:16px">
+				We would like to give thanks to the below APIs and libraries that we have used, for helping us to create a Fake News Extension.
+   				<ul>
+   					<li style="font-size:16px"><a href="https://machinebox.io/">MachineBox's</a> <a href="https://machinebox.io/docs/fakebox">Fakebox</a> for analyzing the article.</li>
+   					<li style="font-size:16px"><a href="https://infringement.report/">Infringement Report</a> for finding webpages where same photos that are found in the article, are already used.</li>
+   					<li style="font-size:16px"><a href="https://mercury.postlight.com/">Mercury Postlight</a> for transforming analysed article into clean text.</li>
+				</ul>
+   			</p>
+			<div id="map3" style="width:400px;height:400px">My map will go here</div>
+   			</div>
+			
+			<div style="padding-top: 5%;">
+			<h4 id="team" style="font-weight:bold; font-size:28px">The team</h4>
+			<table>
+			<tr>
+				<td style="width: 200px; height: 200px; margin-bottom: 0.5em;">
+					<img src="pat.png" alt="Patricija Brečko" style="width: 150px; height: 150px; margin-bottom: 0.5em;">
+					<br>
+				</td>
+				<td>
+					<p style="font-size:16px"><strong>Patricija Brečko</strong> is a 22 year old student of Faculty of Computer and Information Science who likes to work with data, even more so in a good team. She drinks a lot of coffee and wears slippers.</p>
+					<a href="https://www.linkedin.com/in/patricijabrecko/">LinkedIn profile</a>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 200px; height: 200px; margin-bottom: 0.5em;">
+					<img src="neza.png" alt="Neža Đukić" style="width: 150px; height: 150px; margin-bottom: 0.5em;">
+					<br>
+				</td>
+				<td>
+					<p style="font-size:16px"><strong>Neža Đukić</strong> is a 22 year old aquarius and Multimedia student. She is a coffee addict who likes to talk too much - her enthusiasm sometimes gets her carried away.</p>
+					<a href="https://www.linkedin.com/in/ne%C5%BEa-%C4%91uki%C4%87-b81ab3a6/">LinkedIn profile</a>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 200px; height: 200px; margin-bottom: 0.5em;">
+					<img src="anja.png" alt="Anja Hrovatič" style="width: 150px; height: 150px; margin-bottom: 0.5em;">
+					<br>
+				</td>
+				<td>
+					<p style="font-size:16px"><strong>Anja Hrovatič</strong> is a 23 year old Multimedia student who loves dolphins and color blue, appreciates good coffee and "kids because she loves".</p>
+					<a href="https://www.linkedin.com/in/anja-hrovati%C4%8D-626315aa/">LinkedIn profile</a>
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 200px; height: 200px; margin-bottom: 0.5em;">
+					<img src="zaksek.png" alt="Luka Zakšek" style="width: 150px; height: 150px; margin-bottom: 0.5em;">
+					<br>
+				</td>
+				<td>
+					<p style="font-size:16px"><strong>Luka Zakšek</strong> is a 21 year old Multimedia student. He likes to do sports, listen to different music genres and gets reborn every summer.</p>
+					<a href="https://www.linkedin.com/in/luka-zak%C5%A1ek-a36233a7/">LinkedIn profile</a>
+				</td>
+			</tr>
+			</table>
+			</div>
+			
+   		</div>
+   		<footer class="footer"  style="padding-top: 5%;">
+   			<hr>
+   			<p>&copy; Red Panda, DragonHack 2018</p>
+   		</footer>
+   	</div>
+   	
+			
+			<script>
+			function myMap() {
+			var mapOptions = {
+				center: new google.maps.LatLng(51.5, -0.12),
+				zoom: 10,
+				mapTypeId: google.maps.MapTypeId.HYBRID
+			}
+			var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			var map2 = new google.maps.Map(document.getElementById("map2"), mapOptions);
+			var map3 = new google.maps.Map(document.getElementById("map3"), mapOptions);
+			} 
+			</script>
+		
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW6r5vAsQXHXHcu5RT1FbgutrGgmEHXo&callback=myMap"></script> 
+	
+	<script>
+var map;
+  
+  var josefov = new google.maps.LatLng(49.3119, 16.67029);
+  //Define OSM as base layer in addition to the default Google layers
+  var osmMapType = new google.maps.ImageMapType({
+                  getTileUrl: function (coord, zoom) {
+                      return "http://tile.openstreetmap.org/" +
+                  zoom + "/" + coord.x + "/" + coord.y + ".png";
+                  },
+                  tileSize: new google.maps.Size(256, 256),
+                  isPng: true,
+                  alt: "OpenStreetMap",
+                  name: "OSM",
+                  maxZoom: 19
+              });
+
+ //Define custom WMS tiled layer
+ var SHLayer = new google.maps.ImageMapType({
+                  getTileUrl: function (coord, zoom) {
+                      var proj = map.getProjection();
+                      var zfactor = Math.pow(2, zoom);
+                      // get Long Lat coordinates
+                      var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 512 / zfactor, coord.y * 512 / zfactor));
+                      var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 512 / zfactor, (coord.y + 1) * 512 / zfactor));
+
+                      //create the Bounding box string
+                      var bbox =     (top.lng()) + "," +
+                                     (bot.lat()) + "," +
+                                     (bot.lng()) + "," +
+                                     (top.lat());
+
+                      //base WMS URL
+                      var url = "https://services.sentinel-hub.com/ogc/wms/ef9855ef-3e2d-462b-96f2-7e08a10dfe9d";
+                      url += "?REQUEST=GetMap"; //WMS operation
+                      url += "&SERVICE=WMS";    //WMS service
+                      url += "&VERSION=1.1.1";  //WMS version  
+                      url += "&LAYERS=FORRESTIZATION-PANDA"; //WMS layers
+                      url += "&FORMAT=image/jpg" ; //WMS format
+                      url += "&SRS=EPSG:4326";     //set WGS84 
+                      url += "&BBOX=" + bbox;      // set bounding box
+                      url += "&WIDTH=512";         //tile size in google
+                      url += "&HEIGHT=512";
+                      
+                      
+                      
+                      
+                      return url;                 // return URL for the tile
+
+                  },
+                  tileSize: new google.maps.Size(512, 512)
+              });
+
+                                                
+
+              initialize();
+  function initialize() {
+      var mapOptions = {
+          zoom: 10,
+          center: new google.maps.LatLng(30.408413059145214, 88.3355712890625),
+          mapTypeId: 'OSM',
+          mapTypeControlOptions: {
+              mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN],
+              style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+          }
+      };
+      map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      map.mapTypes.set('OSM', osmMapType);
+      map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+      //add WMS layer
+      map.overlayMapTypes.push(SHLayer);
+     
+  }
+
+        </script>
+	
+   </body>
+</html>
