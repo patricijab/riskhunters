@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import urllib.request
 import json
+import csv
+from .forms import * 
 
 token = "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
 url_base = "http://apiv3.iucnredlist.org/api/v3/"
@@ -22,6 +24,10 @@ def habitatsById ( idstr ):
 def countryById ( idstr ):
 	return requesting(url_base + "species/countries/id/" + idstr + token)
 
+def allSpecies():
+    # all endangered species
+    return requesting(url_base + "species/category/EN" + token)
+
 # get data
 def getName( idstr ):
 	return speciesById(idstr)['result'][0]['main_common_name']
@@ -35,6 +41,8 @@ def getHabitats ( idstr ):
 	return habitatsById(idstr)['result']
 def getCountries ( idstr ):
 	return countryById(idstr)['result']
+def getAllSpecies():
+    return allSpecies()['result']
 
 def switch(x):
     return {
@@ -77,3 +85,9 @@ def index(request):
                                                  'status': status,
                                                  'habitats': habitats,
                                                  'threats': threats})
+
+def indexBeforeIndex(request):
+    species_json = getAllSpecies();
+    species = []
+
+    return render(request, 'webapp/indexBeforeIndex.html')

@@ -49,3 +49,10 @@ body {
     background: #4CAF50;
     cursor: pointer;
 }
+
+#bg{
+    background-size: 2100px 1050px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+}
