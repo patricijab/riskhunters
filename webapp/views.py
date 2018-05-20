@@ -2,7 +2,8 @@ from django.shortcuts import render
 import urllib.request
 import json
 import csv
-from .forms import * 
+import re
+from datetime import datetime
 
 token = "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"
 url_base = "http://apiv3.iucnredlist.org/api/v3/"
@@ -54,23 +55,51 @@ def switch(x):
         "NT": "Near threatened"
     }[x]
 
-"""
+def switch2(x):
+    return {
+        "Extinct": 0,
+        "Extinct in the wild": 1,
+        "Critically endangered": 2,
+        'Endangered': 3,
+        'Vulnerable': 4,
+        "Near threatened": 5
+    }[x]
+
 def filterThreats(threats):
     new = []
     for t in threats:
-        if t['timing'] == "Ongoing" and
-"""
+        scores = re.findall(r'\d+', t['score'])
+        if len(scores) > 0:
+            score = int(scores[0])
+            if (score > 4):
+                code = t['code'][0]
+                print(code)
+                new.append(t)
+    return new
+
+def filterHistory(history):
+    years = []
+    statuses = {}
+
+    for h in history:
+        if h['category'] != "Insufficiently Known":
+            years.append(int(h['year']));
+            statuses[h['year']] = h['category'];
+
+    return statuses, sorted(years)
+    #return history
 
 def index(request):
     # RED PANDA EXAMPLE
     taxonid = "714"
-    species_name = "ailurus%20fulgens"
+    species_name = "Ailurus Fulgens"
     name = getName(taxonid)
     status = switch(getStatus(taxonid))
 
+    statuses, history = filterHistory(getHistory(taxonid))
+    minimalYear = history[0]
 
-    history = getHistory(taxonid)
-    threats = getThreats(taxonid)
+    threats = filterThreats(getThreats(taxonid))
 
     habitats_jsons = getHabitats(taxonid)
     habitats = []
@@ -80,11 +109,15 @@ def index(request):
 
     countries = getCountries(taxonid)
 
-    return render(request, 'webapp/index.html', {'range': range(4),
+    return render(request, 'webapp/index.html', {'range': 5-switch2(status),
                                                  'name': name,
+                                                 'latin_name': species_name,
                                                  'status': status,
                                                  'habitats': habitats,
-                                                 'threats': threats})
+                                                 'threats': threats,
+                                                 'history': history,
+                                                 'statuses': json.dumps(statuses),
+                                                 'minimalYear': minimalYear})
 
 def indexBeforeIndex(request):
     species_json = getAllSpecies();

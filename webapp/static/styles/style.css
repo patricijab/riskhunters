@@ -1,11 +1,56 @@
 body {
-    /*background-color: green;*/
+    font-family: "Gill Sans", sans-serif;
+    /*background-color: #336600;*/
+
 }
 
+.container {
+
+}
+
+.name {
+    font-size: 60px;
+}
+
+.latin-name {
+    font-size: 20px;
+    font-style: italic;
+}
+
+.navbar {
+    background-color: #336600;
+}
+
+.current-status-label {
+    padding-left: 10px;
+}
+
+.status-icon {
+    color: #b34700;
+    margin-right: 10px;
+}
+
+.current-status {
+    padding-left: 10px;
+    font-size: 20px;
+    color: #b34700;
+}
 
 .red-panda-icon {
-    width: 80px;
+    width: 90px;
+}
 
+.red-panda-icon-history {
+    width: 60px;
+}
+
+.red-panda {
+    border-radius: 5px;
+}
+
+.panel {
+    padding: 20px;
+    height: 778px;
 }
 
 .disappearing {
@@ -51,7 +96,7 @@ body {
 }
 
 #bg{
-    background-size: 2100px 1050px;
+    background-size: 1920px 800px;
     background-repeat: no-repeat;
     background-position: top;
     background-attachment: fixed;
