@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import urllib.request
 import json
+import csv
 import re
 from datetime import datetime
 
@@ -24,6 +25,10 @@ def habitatsById ( idstr ):
 def countryById ( idstr ):
 	return requesting(url_base + "species/countries/id/" + idstr + token)
 
+def allSpecies():
+    # all endangered species
+    return requesting(url_base + "species/category/EN" + token)
+
 # get data
 def getName( idstr ):
 	return speciesById(idstr)['result'][0]['main_common_name']
@@ -37,6 +42,8 @@ def getHabitats ( idstr ):
 	return habitatsById(idstr)['result']
 def getCountries ( idstr ):
 	return countryById(idstr)['result']
+def getAllSpecies():
+    return allSpecies()['result']
 
 def switch(x):
     return {
@@ -125,3 +132,9 @@ def index(request):
                                                  'history': history,
                                                  'statuses': json.dumps(statuses),
                                                  'minimalYear': minimalYear})
+
+def indexBeforeIndex(request):
+    species_json = getAllSpecies();
+    species = []
+
+    return render(request, 'webapp/indexBeforeIndex.html')
