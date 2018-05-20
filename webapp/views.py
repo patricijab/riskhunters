@@ -65,6 +65,20 @@ def switch2(x):
         "Near threatened": 5
     }[x]
 
+def switch3(x):
+    return {
+        "1": "Residential and commercial development",
+        "2": "Agriculture and aquaculture",
+        "3": "Energy production and mining",
+        "4": "Transportation",
+        "5": "Biological resource (hunting, wood harvest, fishing ...)",
+        "6": "Human intrusion and disturbance",
+        "7": "Natural system modifications (fire, water use)",
+        "8": "Invasive and other problematic species, diseases",
+        "9": "Pollution (air garbage)",
+        "10": "Geological events (volcano, earthquake, landslide ...)"
+    }[x]
+
 def filterThreats(threats):
     new = []
     for t in threats:
@@ -73,8 +87,8 @@ def filterThreats(threats):
             score = int(scores[0])
             if (score > 4):
                 code = t['code'][0]
-                print(code)
-                new.append(t)
+                if switch3(code) not in new:
+                    new.append(switch3(code))
     return new
 
 def filterHistory(history):
