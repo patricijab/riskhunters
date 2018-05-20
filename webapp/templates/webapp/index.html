@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="{% static 'jquery-3.3.1.min.js' %}" type="text/javascript"></script>
 	<script src="{% static 'bootstrap.min.js' %}" type="text/javascript"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+
+    {% load static %}
+    <script src="{% static 'states.js' %}"></script>
+
 </head>
 <body>
 
@@ -46,7 +54,7 @@
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon"/>
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon"/>
 
-                <h4><i class="fa fa-leaf status-icon" style="font-size:24px;"></i>Habitats:</h4>
+                <h4><i class="fa fa-leaf status-icon" style="font-size:24px;"></i>Habitat:</h4>
 
                 <ul>
                     {% load static %}
@@ -55,7 +63,7 @@
                     {% endfor %}
                 </ul>
 
-                <h4><i class="fa fa-history status-icon" style="font-size:24px;"></i>History:</h4>
+                <h4><i class="fa fa-history status-icon" style="font-size:24px;"></i>History of population:</h4>
 
                 <p>Year: <span id="demo"></span></p>
 
@@ -72,7 +80,7 @@
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon-history"/>
                 <img src="{% static 'images/red-panda-icon.png' %}" alt="Red Panda" class="red-panda-icon-history"/>
 
-                <h4><i class="fa fa-bolt status-icon" style="font-size:24px;"></i>Threats:</h4>
+                <h4><i class="fa fa-bolt status-icon" style="font-size:24px;"></i>Most severe threats:</h4>
 
                 <ul>
                     {% load static %}
@@ -88,60 +96,229 @@
     </div>
 
     <br>
-    
-    
-    <br>
-    <div class="panel panel-success">
-        <div id="map" class="mapClass" style="width:800px;height:400px">Forest map</div>
-    </div>
-        <br>
-        <br>
 
-        <div class="container-fluid">
-    <!-- Control the column width, and how they should appear on different devices -->
-    <div class="panel panel-success">
     <div class="row">
-      <div class="col-sm-6">
-        <p>Deforrestation by year: <span id="forrest"></span></p>
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+                <nav class="navbar">
+                  <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                      <li><a class="navbar2-style" href="javascript: showForestMap();">Habitat</a></li>
+                      <li><a class="navbar2-style" href="javascript: showCountryMap();">Habitat by country</a></li>
+                      <li><a class="navbar2-style" href="javascript: showEnvironmentalChanges();">Environmental changes over time</a></li>
+                      <li><a class="navbar2-style" href="javascript: showAirPollution();">Air pollution</a></li>
+                    </ul>
+                  </div>
+                </nav>
+                <div id="map" style="width:100%; height:90%;" class="mapClass">Forest map</div>
+                <div id='map-countries' style="display:none; width:100%; height:90%;"></div>
 
-        <img id="placeholder" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-04-19.jpg' %}" />
-        <br> 
-        <br>
-        <div class="slidecontainer2">
-            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange2">
+                <div id="environmental-changes" style="display:none; width:100%; height:90%;">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p>Deforrestation by year: <span id="forrest"></span></p>
+
+                        <img id="placeholder" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-04-19.jpg' %}" />
+                        <br>
+                        <br>
+                        <div class="slidecontainer2">
+                            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange2">
+                        </div>
+                    </div>
+                      <div class="col-sm-6">
+                        <p>Agriculture areas by year: <span id="agriculture"></span></p>
+
+                        <img id="placeholder2" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-05-20.jpg' %}" />
+                        <br>
+                        <br>
+                        <div class="slidecontainer3">
+                            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange3">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <br>
+                        <br>
+                        <p>Urbanization by year: <span id="urbanization"></span></p>
+
+                        <img id="placeholder3" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-01-19.jpg' %}" />
+                        <br>
+                        <br>
+                        <div class="slidecontainer4">
+                            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange4">
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+
+                    <div id='maps' style="display:none; width:100%; height:90%;"></div>
+
+            </div>
         </div>
     </div>
-      <div class="col-sm-6">
-        <p>Agriculture areas by year: <span id="agriculture"></span></p>
 
-        <img id="placeholder2" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-05-20.jpg' %}" />
-        <br> 
-        <br>
-        <div class="slidecontainer3">
-            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange3">
-        </div>
-    </div>
-    </div>
     <div class="row">
-        <div class="col-sm-6">
-        <br>
-        <br>
-        <p>Urbanization by year: <span id="urbanization"></span></p>
+        <div class="col-lg-12">
+            <div class="panel panel-success">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                      <a class="navbar-brand" href="">Take action!</a>
+                    </div>
+                </div>
+            </nav>
 
-        <img id="placeholder3" style="width:100%;" src="{% static 'images/Sentinel-2 image on 2018-04-19.jpg' %}" />
-        <br> 
-        <br>
-        <div class="slidecontainer4">
-            <input type="range" min="2015" max="2018" value="2018" class="slider" id="myRange4">
+            <div class="col-lg-4">
+                <div style="display:inline-block; width: 100%;">
+                    <h4><i class="fa fa-child status-icon" style="font-size:24px;"></i>RedPandaRanger badge (children)</h4>
+                    <br>
+                    <a href="https://redpandanetwork.org/get-involved/red-panda-ranger/" target="_blank">
+                        <img style="width: 100%;" src="https://redpandanetwork.org/blog/wp-content/uploads/2011/12/rangermap.jpg">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div style="display:inline-block; width: 100%;">
+                    <h4><i class="fa fa-trophy status-icon" style="font-size:24px;"></i>Become active</h4>
+                    <br>
+                    <a href="https://www.greenpeace.org/international/act/stand-with-the-guardians-of-the-amazon/" target="_blank">
+                        <img style="width: 100%;" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/03d15e5725723.5602422db4ae2.jpg">
+                    </a></div>
+            </div>
+            <div class="col-lg-4">
+                <div style="display:inline-block; width: 100%;">
+                    <h4><i class="fa fa-home status-icon" style="font-size:24px;"></i>Adopt a panda</h4>
+                    <br>
+                    <a href="https://redpandanetwork.org/contribute/adopt-a-panda/" target="_blank"><img style="width: 100%;" src="https://i.pinimg.com/originals/7a/de/38/7ade382a9076715406ffa8957c246dfd.png"></a></div>
+            </div>
+            </div>
         </div>
     </div>
-    </div>    
-    </div>
+
+
 </div>
 
-</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW6r5vAsQXHXHcu5RT1FbgutrGgmEHXo&callback=myMap"></script>
 
 <script>
+
+      var  OSM_URL  =  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      var  OSM_ATTRIB  =  '&copy;  <a  href="http://openstreetmap.org/copyright">OpenStreetMap</a>  contributors';
+      var  osmLayer  =  L.tileLayer(OSM_URL);
+
+      var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=_TOKEN_ID_";
+      var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';
+      var  waqiLayer  =  L.tileLayer(WAQI_URL);
+
+      var  maps  =  L.map('maps', {zoomControl:false}).setView([37.9, 104.7],  3);
+      maps.dragging.disable();
+      maps.addLayer(osmLayer).addLayer(waqiLayer);
+      var legend1 = L.control({position: 'bottomright'});
+	legend1.onAdd = function (map) {
+		var div = L.DomUtil.create('div', 'info legend lala'),
+			labels = [],
+			labels2 = ["Good", "Moderate", "Unhealthy (sensitive groups)", "Unhealthy", "Very unhealthy", "Hazardous"],
+			colors = ["#169769", "#F8DF47", "#FF9740", "#CA0B37", "#671196", "#770828"];
+		for (var i = 0; i < labels2.length; i++) {
+			labels.push('<i style="background:' + colors[i] + '"></i> ' + labels2[i]);
+		}
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+	legend1.addTo(maps);
+
+// --- KODA ZA MAP DRZAV ---
+
+var redPanda = {"Bosnia and Herzegovina":"Present",
+                "Montenegro":"Possibly extinct",
+                "Slovenia":"Vulnerable"}
+if ({{taxonid}} == 714) {
+    redPanda = {"Bhutan": "Present",
+                "India" :"Possibly extinct",
+                "Myanmar":"Vulnerable",
+                "Nepal":"Present",
+                "China":"Extinct"};
+}
+var mapp = L.map('map-countries').setView([46, 14], 2);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    id: 'mapbox.light'
+}).addTo(mapp);
+// control that shows state info on hover
+var info = L.control();
+info.onAdd = function (mapp) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Status</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + (redPanda[props.name] ? redPanda[props.name]: "No presence")
+        : 'Hover over a country');
+};
+info.addTo(mapp);
+// get color depending on population density value
+function getColor(d) {
+    return d == "Extinct" ? '#800026' :
+        d == "Possibly extinct"  ? '#BD0026' :
+        d == "Vulnerable"  ? '#FC4E2A' :
+        d == "Present"   ? '#FEB24C' : '#D3D3D3';
+}
+function style(feature) {
+    return {
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7,
+        fillColor: getColor(redPanda[feature.properties.name])
+    };
+}
+function highlightFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 1,
+        color: '#A9A9A9',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+    info.update(layer.feature.properties);
+}
+var geojson;
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update();
+}
+function zoomToFeature(e) {
+    mapp.fitBounds(e.target.getBounds());
+}
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+geojson = L.geoJson(statesData, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(mapp);
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (mapp) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        labels = [],
+        labels2 = ["Extinct", "Possibly extinct", "Vulnerable", "Present", "No presence"];
+    for (var i = 0; i < labels2.length; i++) {
+        labels.push('<i style="background:' + getColor(labels2[i]) + '"></i> ' + labels2[i]);
+    }
+    div.innerHTML = labels.join('<br>');
+    return div;
+};
+legend.addTo(mapp);
+
 
 function recolor(numberOfColored, className) {
     var x = document.getElementsByClassName(className);
@@ -168,6 +345,36 @@ function switch2(x) {
     }[x]
 }
 
+function showForestMap() {
+    document.getElementById("map-countries").style.display="none";
+    document.getElementById("environmental-changes").style.display="none";
+    document.getElementById("maps").style.display="none";
+    document.getElementById("map").style.display="block";
+}
+
+function showCountryMap() {
+    document.getElementById("map").style.display="none";
+    document.getElementById("environmental-changes").style.display="none";
+    document.getElementById("maps").style.display="none";
+    document.getElementById("map-countries").style.display="block";
+    mapp.invalidateSize();
+}
+
+function showEnvironmentalChanges() {
+    document.getElementById("map").style.display="none";
+    document.getElementById("map-countries").style.display="none";
+    document.getElementById("maps").style.display="none";
+    document.getElementById("environmental-changes").style.display="block";
+}
+
+function showAirPollution() {
+    document.getElementById("map").style.display="none";
+    document.getElementById("map-countries").style.display="none";
+    document.getElementById("environmental-changes").style.display="none";
+    document.getElementById("maps").style.display="block";
+    maps.invalidateSize();
+}
+
 recolor(parseInt("{{range}}"), "red-panda-icon-history");
 recolor(parseInt("{{range}}"), "red-panda-icon");
 
@@ -190,6 +397,11 @@ slider.oninput = function() {
     recolor(5-switch2(statuses[years[chosen]]), "red-panda-icon-history");
 }
 
+
+
+</script>
+
+<script>
 var slider2 = document.getElementById("myRange2");
 var output2 = document.getElementById("forrest");
 output2.innerHTML = slider2.value;
@@ -234,7 +446,7 @@ slider4.oninput = function() {
     output4.innerHTML = this.value;
     var img = document.getElementById("placeholder3");
     if (this.value === '2018') {
-        img.setAttribute("src","{% static 'images/Sentinel-2 image on 2018-04-19.jpg' %}");
+        img.setAttribute("src","{% static 'images/Sentinel-2 image on 2018-01-19.jpg' %}");
     } else if (this.value === '2017') {
         img.setAttribute("src","{% static 'images/Sentinel-2 image on 2017-03-03.jpg' %}");
     } else if (this.value === '2016') {
@@ -244,94 +456,95 @@ slider4.oninput = function() {
     }
 }
 
-function myMap() {
-            var mapOptions = {
-                center: new google.maps.LatLng(51.5, -0.12),
-                zoom: 10,
-                mapTypeId: google.maps.MapTypeId.HYBRID
-            }
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-            var map2 = new google.maps.Map(document.getElementById("map2"), mapOptions);
-            var map3 = new google.maps.Map(document.getElementById("map3"), mapOptions);
-            } 
-            </script>
-        
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW6r5vAsQXHXHcu5RT1FbgutrGgmEHXo&callback=myMap"></script> 
-    
-    <script>
-var map;
-  
-  var josefov = new google.maps.LatLng(49.3119, 16.67029);
-  //Define OSM as base layer in addition to the default Google layers
-  var osmMapType = new google.maps.ImageMapType({
-                  getTileUrl: function (coord, zoom) {
-                      return "http://tile.openstreetmap.org/" +
-                  zoom + "/" + coord.x + "/" + coord.y + ".png";
-                  },
-                  tileSize: new google.maps.Size(256, 256),
-                  isPng: true,
-                  alt: "OpenStreetMap",
-                  name: "OSM",
-                  maxZoom: 19
-              });
-
- //Define custom WMS tiled layer
- var SHLayer = new google.maps.ImageMapType({
-                  getTileUrl: function (coord, zoom) {
-                      var proj = map.getProjection();
-                      var zfactor = Math.pow(2, zoom);
-                      // get Long Lat coordinates
-                      var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 512 / zfactor, coord.y * 512 / zfactor));
-                      var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 512 / zfactor, (coord.y + 1) * 512 / zfactor));
-
-                      //create the Bounding box string
-                      var bbox =     (top.lng()) + "," +
-                                     (bot.lat()) + "," +
-                                     (bot.lng()) + "," +
-                                     (top.lat());
-
-                      //base WMS URL
-                      var url = "https://services.sentinel-hub.com/ogc/wms/ef9855ef-3e2d-462b-96f2-7e08a10dfe9d";
-                      url += "?REQUEST=GetMap"; //WMS operation
-                      url += "&SERVICE=WMS";    //WMS service
-                      url += "&VERSION=1.1.1";  //WMS version  
-                      url += "&LAYERS=FORRESTIZATION-PANDA"; //WMS layers
-                      url += "&FORMAT=image/jpg" ; //WMS format
-                      url += "&SRS=EPSG:4326";     //set WGS84 
-                      url += "&BBOX=" + bbox;      // set bounding box
-                      url += "&WIDTH=512";         //tile size in google
-                      url += "&HEIGHT=512";
-                      
-                      
-                      
-                      
-                      return url;                 // return URL for the tile
-
-                  },
-                  tileSize: new google.maps.Size(512, 512)
-              });
-
-                                                
-
-              initialize();
-  function initialize() {
-      var mapOptions = {
-          zoom: 11,
-          center: new google.maps.LatLng(27.775239, 85.874997),
-          mapTypeId: 'OSM',
-          mapTypeControlOptions: {
-              mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN],
-              style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-          }
-      };
-      map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      map.mapTypes.set('OSM', osmMapType);
-      map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-      //add WMS layer
-      map.overlayMapTypes.push(SHLayer);
-     
-  }
 </script>
+
+<script> // GOOGLE MAPS
+function myMap() {
+    var mapOptions = {
+        center: new google.maps.LatLng(51.5, -0.12),
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    //var map2 = new google.maps.Map(document.getElementById("map2"), mapOptions);
+    //var map3 = new google.maps.Map(document.getElementById("map3"), mapOptions);
+}
+
+var map;
+
+var josefov = new google.maps.LatLng(49.3119, 16.67029);
+
+//Define OSM as base layer in addition to the default Google layers
+
+var osmMapType = new google.maps.ImageMapType({
+  getTileUrl: function (coord, zoom) {
+      return "http://tile.openstreetmap.org/" +
+  zoom + "/" + coord.x + "/" + coord.y + ".png";
+  },
+  tileSize: new google.maps.Size(256, 256),
+  isPng: true,
+  alt: "OpenStreetMap",
+  name: "OSM",
+  maxZoom: 19
+});
+
+//Define custom WMS tiled layer
+var SHLayer = new google.maps.ImageMapType({
+    getTileUrl: function (coord, zoom) {
+        var proj = map.getProjection();
+        var zfactor = Math.pow(2, zoom);
+        // get Long Lat coordinates
+        var top = proj.fromPointToLatLng(new google.maps.Point(coord.x * 512 / zfactor, coord.y * 512 / zfactor));
+        var bot = proj.fromPointToLatLng(new google.maps.Point((coord.x + 1) * 512 / zfactor, (coord.y + 1) * 512 / zfactor));
+
+        //create the Bounding box string
+        var bbox = (top.lng()) + "," +
+                 (bot.lat()) + "," +
+                 (bot.lng()) + "," +
+                 (top.lat());
+
+        //base WMS URL
+        var url = "https://services.sentinel-hub.com/ogc/wms/ef9855ef-3e2d-462b-96f2-7e08a10dfe9d";
+        url += "?REQUEST=GetMap"; //WMS operation
+        url += "&SERVICE=WMS";    //WMS service
+        url += "&VERSION=1.1.1";  //WMS version
+        url += "&LAYERS=FORRESTIZATION-PANDA"; //WMS layers
+        url += "&FORMAT=image/jpg" ; //WMS format
+        url += "&SRS=EPSG:4326";     //set WGS84
+        url += "&BBOX=" + bbox;      // set bounding box
+        url += "&WIDTH=512";         //tile size in google
+        url += "&HEIGHT=512";
+
+        return url;                 // return URL for the tile
+
+    },
+    tileSize: new google.maps.Size(512, 512)
+});
+
+initialize();
+
+function initialize() {
+  var mapOptions = {
+      zoom: 11,
+      center: new google.maps.LatLng(27.775239, 85.874997),
+      mapTypeId: 'OSM',
+      mapTypeControlOptions: {
+          mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN],
+          style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+      }
+  };
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  map.mapTypes.set('OSM', osmMapType);
+  map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+  //add WMS layer
+  map.overlayMapTypes.push(SHLayer);
+
+}
+
+</script>
+
+
+
 
 </body>
 </html>
